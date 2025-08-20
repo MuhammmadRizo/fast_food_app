@@ -7,10 +7,15 @@ import {
     Dimensions,
     Image
 } from 'react-native'
-import {Slot} from "expo-router";
+import {Redirect, Slot} from "expo-router";
 import {images} from "@/constants";
+import useAuthStore from "@/store/auth.store";
 
-const _Layout = () => {
+export default function AuthLayout() {
+    const { isAuthenticated } = useAuthStore();
+
+    if(isAuthenticated) return <Redirect href="/" />
+
     return (
         <KeyboardAvoidingView behavior={Platform.OS == 'ios' ? 'padding' : 'height'}>
             <ScrollView
@@ -27,9 +32,10 @@ const _Layout = () => {
                         resizeMode={"stretch"}/>
                     <Image source={images.logo} className={"absolute size-48 self-center z-10 -bottom-16"} />
                 </View>
-            <Slot />
+                <Slot />
             </ScrollView>
         </KeyboardAvoidingView>
     )
 }
-export default _Layout
+// bu yoqda const _Layout bilan export default _Layout qisak va export default _Layout ni o'chirib tashlasak HomeScreen ishlayapti.
+//

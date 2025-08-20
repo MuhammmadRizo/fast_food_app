@@ -1,9 +1,10 @@
-import {View, Text, Button, Alert} from 'react-native'
+import {View, Text, Alert} from 'react-native'
 import {Link, router} from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
 import {useState} from "react";
 import {signIn} from "@/lib/appwrite";
+import * as Sentry from "@sentry/react-native";
 
 const SignIn = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -19,9 +20,9 @@ const SignIn = () => {
             await signIn({ email, password });
 
             router.replace("/")
-
         } catch (error: any) {
             Alert.alert("Xatolik", error.message)
+            Sentry.captureEvent(error)
         } finally {
             setIsSubmitting(false);
         }

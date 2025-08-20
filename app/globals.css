@@ -74,8 +74,9 @@
     }
 
     .tab-icon {
-        @apply flex min-w-20 items-center justify-center min-h-full gap-1 mt-12;
+        @apply flex min-w-32 items-center justify-center min-h-full gap-1 mt-12;
     }
+
 
     .offer-card {
         @apply w-full h-48 my-3 rounded-xl overflow-hidden shadow-lg flex items-center gap-5;
